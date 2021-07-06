@@ -9,9 +9,11 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "default-passive-events": "^2.0.0",
     "element-ui": "^2.15.3",
+    "js-cookie": "^2.2.1",
     "less-loader": "^5.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",

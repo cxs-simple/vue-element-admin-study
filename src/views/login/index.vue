@@ -43,15 +43,12 @@
         <el-button type="primary" class="width-100p" @click="doLogin">登录</el-button>
       </el-form-item>
       <el-form-item class="login-button">
-        <el-link type="primary" class="line-height-15" @click="dialogVisible=true">联系我们</el-link>
+        <el-link type="primary" class="line-height-15" @click="dialogVisible=true">其他登录方式</el-link>
       </el-form-item>
     </el-form>
 
     <!-- 对话框 -->
-    <el-dialog title="联系我们" :visible.sync="dialogVisible">
-      <span>Can not be simulated on local, so please combine you own business simulation!!!</span>
-      <br>
-      <br>
+    <el-dialog title="其他登录方式" :visible.sync="dialogVisible">
       <br>
       <social-sign />
     </el-dialog>
@@ -124,6 +121,9 @@ import SocialSign from './components/SocialSignin'
         this.$refs.loginForm.validate(valid => {
           // 校验成功
           if (valid) {
+            this.$store.dispatch('login', this.loginForm).then(() => {
+              
+            })
             console.log("success submit!")
           } else {
             // 校验失败
