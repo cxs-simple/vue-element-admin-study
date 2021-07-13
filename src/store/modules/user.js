@@ -4,7 +4,9 @@ import { login } from '@/api/user'
 // 数据
 const state = {
   // token
-  token: getToken()
+  token: getToken(),
+  // 角色权限
+  roles: []
 }
 
 const mutations = {
@@ -36,6 +38,11 @@ const actions = {
         inject(error)
       })
     })
+  },
+
+  // 获取用户权限信息
+  getInfo() {
+
   }
 }
 

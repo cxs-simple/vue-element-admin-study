@@ -40,7 +40,7 @@
 
       <!-- 按钮区域 -->
       <el-form-item>
-        <el-button type="primary" class="width-100p" @click="doLogin">登录</el-button>
+        <el-button :loading="loading"  tabindex="3" type="primary" class="width-100p" @click="doLogin">登录</el-button>
       </el-form-item>
       <el-form-item class="login-button">
         <el-link type="primary" class="line-height-15" @click="dialogVisible=true">其他登录方式</el-link>
@@ -103,7 +103,8 @@ import SocialSign from './components/SocialSignin'
         
         passwordType: 'password',
         capsTooltip: false,
-        dialogVisible: false
+        dialogVisible: false,
+        loading: false
       }
     },
     mounted() {
@@ -121,9 +122,13 @@ import SocialSign from './components/SocialSignin'
         this.$refs.loginForm.validate(valid => {
           // 校验成功
           if (valid) {
+            this.loading = true
             this.$store.dispatch('login', this.loginForm).then(() => {
-              
+              this.loading = false
+            }).catch(() => {
+              this.loading = false
             })
+            console.log(this.$route)
             console.log("success submit!")
           } else {
             // 校验失败
