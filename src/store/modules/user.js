@@ -1,5 +1,5 @@
 import { getToken, setToken } from '@/utils/auth'
-import { login } from '@/api/user'
+import { login, getInfo } from '@/api/user'
 
 // 数据
 const state = {
@@ -20,12 +20,11 @@ const actions = {
   login({ commit }, userInfo) {
     // 从参数中解构出username和password
     const { username, password } = userInfo
-    return new Promise((resolve, inject) => {
+    return new Promise((resolve, reject) => {
       // 登录者信息
       const loginData = {username: username.trim(), password: password}
       login(loginData).then(response => {
         const { data } = response
-        console.log(data)
         // 调用mutatisons里的方法改变state中的token数据
         commit('SET_TOKEN', data.token)
         // 将token放入cookies
@@ -35,18 +34,29 @@ const actions = {
       }).catch(error => {
         console.log(error)
         // 异步请求失败时调用inject()方法
-        inject(error)
+        reject(error)
       })
     })
   },
 
   // 获取用户权限信息
   getInfo() {
+    return new Promise((resolve, reject) => {
+      // 调用api获取用户权限信息
+      getInfo().then(response => {
+        console.log(response)
+
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
 
   }
 }
 
 export default {
+  namespaced: true,
   state,
   mutations,
   actions

@@ -91,8 +91,8 @@ import SocialSign from './components/SocialSignin'
       return {
         // 登录用Form
         loginForm: {
-          username: '',
-          password: ''
+          username: 'admin',
+          password: '123456'
         },
 
         // 校验规则
@@ -104,7 +104,22 @@ import SocialSign from './components/SocialSignin'
         passwordType: 'password',
         capsTooltip: false,
         dialogVisible: false,
-        loading: false
+        loading: false,
+        redirect: undefined,
+        otherQuery: {}
+      }
+    },
+    watch: {
+      // 监听路由
+      $route: {
+        handler: function(route) {
+          const query = route.query
+          if(query) {
+            this.redirect = query.redirect
+            // 获取请求url中的其他参数
+            this.otherQuery = this.getOtherQuery()
+          }
+        }
       }
     },
     mounted() {
@@ -123,7 +138,9 @@ import SocialSign from './components/SocialSignin'
           // 校验成功
           if (valid) {
             this.loading = true
-            this.$store.dispatch('login', this.loginForm).then(() => {
+            this.$store.dispatch('user/login', this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             }).catch(() => {
               this.loading = false
@@ -136,6 +153,16 @@ import SocialSign from './components/SocialSignin'
             return false
           }
         })
+      },
+
+      // 获取请求url中的其他参数
+      getOtherQuery(query) {
+        return Object.keys(query).reduce((acc, cur) => {
+          if(cur != 'redirect') {
+            acc[cur] = query[cur]
+          }
+          return acc
+        }, {})
       },
 
       // eye按下后

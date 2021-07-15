@@ -8,3 +8,11 @@ export function login(data) {
     data
   })
 }
+
+// 获取用户角色信息
+export function getInfo() {
+  return request({
+    url: '/userinfo',
+    method: 'get'
+  })
+}

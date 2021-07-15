@@ -3,6 +3,7 @@ import App from "./App";
 import router from "./router";
 import store from "./store";
 import 'default-passive-events'
+import "./permission"
 
 // element-ui引入
 import Element from "element-ui";

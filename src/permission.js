@@ -25,14 +25,17 @@ router.beforeEach(async(to, from, next) => {
   if (hasToken) {
     // 判断迁移画面是否为login画面
     if(to.path == '/login') {
+      console.log(1111)
       // 放行迁移至主页
       next({ path: '/'})
       // 导航条结束
       NProgress.done()
     } else {
+
+      
       // 判断是否有权限迁移画面
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
-
+      console.log(hasRoles)
       // 有权限
       if(hasRoles) {
         // 放行
@@ -41,14 +44,15 @@ router.beforeEach(async(to, from, next) => {
         // 无权限
         try {
           // 获取当前用户权限
-
+          console.log(await store.dispatch('user/getInfo'))
         } catch(error) {
-
+          console.log(5)
         }
       }
     }
   } else {
     // token不存在
+      console.log(2)
 
     // 是否存在于放行白名单中
     if (whiteList.indexOf(to.path) != -1) {
