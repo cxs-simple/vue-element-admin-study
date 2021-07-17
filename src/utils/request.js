@@ -26,7 +26,7 @@ service.interceptors.request.use(
   }
 )
 
-
+// 响应拦截器
 service.interceptors.response.use(
   response => {
     const res = response.data
@@ -47,7 +47,7 @@ service.interceptors.response.use(
           type: 'warning'
         }).then(() => {
           // 清除token
-          store.dispatch('user/restToken').then(() => {
+          store.dispatch('user/resetToken').then(() => {
             // windows自带方法：重新加载页面
             location.reload()
           })
@@ -57,6 +57,15 @@ service.interceptors.response.use(
     } else {
       return res
     }
+  },
+  error => {
+    console.log('err' + error)
+    Message({
+      message: error.message,
+      type: 'error',
+      duration: 5 * 1000
+    })
+    return Promise.reject(error)
   }
 )
 

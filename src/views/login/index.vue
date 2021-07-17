@@ -117,9 +117,12 @@ import SocialSign from './components/SocialSignin'
           if(query) {
             this.redirect = query.redirect
             // 获取请求url中的其他参数
-            this.otherQuery = this.getOtherQuery()
+            this.otherQuery = this.getOtherQuery(query)
+            console.log('2222222222')
           }
-        }
+        },
+        // 是否以当前的初始值执行handler函数，页面加载时就用当前的route执行handler
+        immediate: true
       }
     },
     mounted() {
@@ -133,6 +136,7 @@ import SocialSign from './components/SocialSignin'
     methods: {
       // 登录按钮按下后
       doLogin() {
+          console.log('dologin')
         // 校验
         this.$refs.loginForm.validate(valid => {
           // 校验成功
@@ -140,13 +144,13 @@ import SocialSign from './components/SocialSignin'
             this.loading = true
             this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
+              // 重定向至登录后页面
+            console.log("success submit!")
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             }).catch(() => {
               this.loading = false
             })
-            console.log(this.$route)
-            console.log("success submit!")
           } else {
             // 校验失败
             console.log('error submit!')

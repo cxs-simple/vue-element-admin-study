@@ -1,10 +1,11 @@
-import Vue from "vue";
-import Router from "vue-router";
-import { Layout } from "@/layout"
+import Vue from "vue"
+import Router from "vue-router"
+import Layout from "@/layout"
 
 Vue.use(Router);
 
-export const routes = [
+// 所有用户可访问的路由
+export const constantRoutes = [
   {
     path: "/login",
     component: () => import("@/views/login"),
@@ -14,13 +15,27 @@ export const routes = [
     component: Layout
     // redirect: '/dashboard'
   }
-];
+]
+
+// 具有一定权限才可以访问的路由
+export const asyncRoutes = [
+
+]
 
 const createRouter = () =>
   new Router({
-    routes,
+    routes: constantRoutes
   });
 
 const router = createRouter();
+
+// 新版本路由比编程式跳转出错解决办法，重写push方法
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) {
+    return originalPush.call(this, location, onResolve, onReject)
+  }
+  return originalPush.call(this, location).catch((err) => err)
+}
 
 export default router;
