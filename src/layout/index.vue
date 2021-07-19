@@ -1,9 +1,14 @@
 <template>
-  <div>iii</div>
+  <div>
+    <sidebar />
+  </div>
 </template>
 
 <script>
+import { Sidebar } from './components'
+
 export default {
-  name: 'Layout'
+  name: 'Layout',
+  components: { Sidebar }
 }
 </script>
