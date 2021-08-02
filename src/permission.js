@@ -69,7 +69,6 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     // token不存在
-      console.log(2)
 
     // 是否存在于放行白名单中
     if (whiteList.indexOf(to.path) !== -1) {

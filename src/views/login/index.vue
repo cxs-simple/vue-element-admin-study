@@ -145,7 +145,7 @@ import SocialSign from './components/SocialSignin'
             this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               // 重定向至登录后页面
-            console.log("success submit!")
+              console.log("success submit!")
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             }).catch(() => {

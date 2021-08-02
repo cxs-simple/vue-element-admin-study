@@ -9,6 +9,7 @@ export const constantRoutes = [
   {
     path: "/login",
     component: () => import("@/views/login"),
+    hidden: true
   },
   {
     path: "/",
@@ -19,7 +20,16 @@ export const constantRoutes = [
 
 // 具有一定权限才可以访问的路由
 export const asyncRoutes = [
-
+  {
+    path: '/permission',
+    component: Layout,
+    name: 'permission',
+    meta: {
+      title: '权限',
+      icon: 'icon-permissions',
+      roles: ['admin']
+    }
+  }
 ]
 
 const createRouter = () =>
