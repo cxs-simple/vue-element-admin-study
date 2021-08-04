@@ -20,5 +20,5 @@ export function validUsername(str) {
 export function isExternal(path) {
   // mailto: 邮箱超链接
   // tel: 电话超链接
-  return /^(https?: |mailto: |tel:)/.test(path)
+  return /^(https?:|mailto:|tel:)/.test(path)
 }

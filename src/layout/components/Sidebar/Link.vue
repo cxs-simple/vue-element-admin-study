@@ -23,6 +23,7 @@ export default {
     type() {
       // 外部链接url
       if (this.isExternal) {
+        console.log(11)
         // 返回a标签
         return 'a'
       }

@@ -10,7 +10,7 @@ import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
 // 引入自己配置的全局css
-import "@/styles/index.css";
+import "@/styles/index.scss";
 
 Vue.config.productionTip = false;
 

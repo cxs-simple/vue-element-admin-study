@@ -22,12 +22,11 @@ export default {
 
     // 图标存在时
     if (icon) {
-      vnodes.push(<i class={'iconfont ' + icon}/>)
+      vnodes.push(<i class={'iconfont ' + icon + ' margin-right-16'}/>)
     }
 
     // 标题存在时
     if (title) {
-      console.log(title)
       vnodes.push(<span>{title}</span>)
     }
     return vnodes
